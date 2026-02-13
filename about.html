@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | mndly</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FBKGXQJSPS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-FBKGXQJSPS');
+    </script>
+
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --text: #ffffff;
+        --dim: #444444;
+        --nav-h: 80px;
+        --easing: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.1;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        font-family:
+          'Inter',
+          -apple-system,
+          sans-serif;
+      }
+
+      /* Signature Grain Overlay */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+        opacity: 0.05;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .container {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 5vw;
+      }
+
+      /* --- NAVIGATION --- */
+      header {
+        height: var(--nav-h);
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        background: rgba(10, 10, 10, 0.8);
+        backdrop-filter: blur(10px);
+      }
+
+      header .container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-weight: 900;
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: var(--text);
+        letter-spacing: -1.5px;
+        z-index: 1100;
+      }
+
+      /* Desktop Nav */
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 4rem;
+      }
+      nav a {
+        text-decoration: none;
+        color: var(--text);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 2px;
+        opacity: 0.4;
+        transition: opacity 0.3s var(--easing);
+      }
+      nav a:hover,
+      nav a.active {
+        opacity: 1;
+      }
+
+      /* Mobile Toggle */
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text);
+        font-family: monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        z-index: 1100;
+      }
+
+      /* Mobile Overlay */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transform: translateY(-100%);
+        transition: transform 0.6s var(--easing);
+        z-index: 1050;
+      }
+      .nav-overlay.active {
+        transform: translateY(0);
+      }
+      .nav-overlay a {
+        font-size: 2rem;
+        font-weight: 800;
+        text-decoration: none;
+        color: var(--text);
+        text-transform: lowercase;
+        letter-spacing: -1px;
+      }
+
+      /* --- LAYOUT STRUCTURE --- */
+      main {
+        padding-top: var(--nav-h);
+        padding-bottom: 20vh;
+      }
+
+      .hero-section {
+        margin-top: 15vh;
+        margin-bottom: 15vh;
+      }
+
+      .hero-title {
+        font-size: clamp(4.5rem, 18vw, 14rem);
+        font-weight: 900;
+        letter-spacing: -0.07em;
+        line-height: 1.1;
+        padding-bottom: 0.05em;
+        text-transform: lowercase;
+        margin-left: -0.06em;
+        display: block;
+      }
+
+      /* --- EDITORIAL GRID --- */
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 2rem;
+      }
+
+      .grid-label {
+        grid-column: 1 / span 3;
+        font-family: monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: var(--dim);
+        letter-spacing: 2px;
+        padding-top: 0.5rem;
+      }
+
+      .about-text-block {
+        grid-column: 5 / span 7;
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+      }
+
+      .about-para {
+        font-size: clamp(1.4rem, 3vw, 2.8rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: var(--text);
+      }
+
+      .about-para span {
+        color: var(--dim);
+      }
+      .about-para strong {
+        font-weight: 600;
+      }
+
+      /* --- ANIMATIONS --- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1.2s var(--easing);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        padding: 8vh 0 4vh 0;
+        border-top: 1px solid #1a1a1a;
+        display: flex;
+        justify-content: space-between;
+        font-family: monospace;
+        font-size: 0.65rem;
+        color: var(--dim);
+        text-transform: uppercase;
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 1024px) {
+        nav ul {
+          display: none;
+        }
+        .menu-toggle {
+          display: block;
+        }
+
+        .grid-label {
+          grid-column: 1 / span 12;
+          margin-bottom: 2rem;
+        }
+        .about-text-block {
+          grid-column: 1 / span 12;
+        }
+        .hero-title {
+          font-size: clamp(3.5rem, 15vw, 8rem);
+        }
+        .about-para {
+          font-size: 1.5rem;
+        }
+        .hero-section {
+          margin-top: 10vh;
+          margin-bottom: 10vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a href="index.html" class="logo">mndly.</a>
+        <nav>
+          <ul>
+            <li><a href="index.html">home</a></li>
+            <li><a href="products.html">products</a></li>
+            <li><a href="about.html" class="active">about</a></li>
+          </ul>
+        </nav>
+        <button class="menu-toggle" id="menuToggle">Menu</button>
+      </div>
+    </header>
+
+    <div class="nav-overlay" id="navOverlay">
+      <a href="index.html">home</a>
+      <a href="products.html">products</a>
+      <a href="about.html">about</a>
+    </div>
+
+    <main class="container">
+      <section class="hero-section">
+        <h1 class="hero-title reveal">mndly is <br />a journey.</h1>
+      </section>
+
+      <div class="content-grid">
+        <div class="grid-label reveal">Our Manifesto // 001</div>
+        <div class="about-text-block">
+          <div class="reveal" style="transition-delay: 0.2s">
+            <p class="about-para">
+              We believe in crafting digital experiences that are both
+              innovative and intuitive. <span>The web is cluttered;</span> we
+              are the correction.
+            </p>
+          </div>
+          <div class="reveal" style="transition-delay: 0.4s">
+            <p class="about-para">
+              Our journey is about creating the next generation of the web in an
+              <strong>opinionated way</strong>—focusing on clarity, efficiency,
+              and design that doesn't age.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="container">
+      <p>&copy; 2026 mndly &mdash; opinionated by default.</p>
+      <p>focused by design</p>
+    </footer>
+
+    <script>
+      // Scroll Reveal
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document
+        .querySelectorAll('.reveal')
+        .forEach((el) => observer.observe(el));
+
+      // Mobile Menu Logic
+      const menuToggle = document.getElementById('menuToggle');
+      const navOverlay = document.getElementById('navOverlay');
+
+      menuToggle.addEventListener('click', () => {
+        const isActive = navOverlay.classList.toggle('active');
+        menuToggle.textContent = isActive ? 'Close' : 'Menu';
+        document.body.style.overflow = isActive ? 'hidden' : 'auto';
+      });
+
+      // Close menu on click
+      document.querySelectorAll('.nav-overlay a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navOverlay.classList.remove('active');
+          menuToggle.textContent = 'Menu';
+          document.body.style.overflow = 'auto';
+        });
+      });
+    </script>
+  </body>
+</html>
